@@ -20,7 +20,9 @@
     "format:check": "eslint .",
     "check": "eslint .",
     "check:fix": "eslint . --fix",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "typecheck:tsc": "tsc --noEmit",
+    "typecheck:watch": "tsc --noEmit --watch"
   },
   "dependencies": {
     "@nuxtjs/color-mode": "^3.5.1",

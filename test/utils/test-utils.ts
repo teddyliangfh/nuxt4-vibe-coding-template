@@ -1,12 +1,13 @@
 import { type RenderOptions, render } from '@testing-library/vue'
 import { createPinia } from 'pinia'
-import { createApp } from 'vue'
+import { vi } from 'vitest'
+import { type Component, createApp } from 'vue'
 
 // Custom render function that includes common providers
-export function renderWithProviders(component: unknown, options: RenderOptions = {}) {
+export function renderWithProviders(component: Component, options: RenderOptions<unknown> = {}) {
   const pinia = createPinia()
 
-  const defaultOptions: RenderOptions = {
+  const defaultOptions: RenderOptions<unknown> = {
     global: {
       plugins: [pinia],
       stubs: {
@@ -34,7 +35,7 @@ export function renderWithProviders(component: unknown, options: RenderOptions =
 }
 
 // Helper to create a test app with common providers
-export function createTestApp(component: unknown, _options: RenderOptions = {}) {
+export function createTestApp(component: Component, _options: RenderOptions<unknown> = {}) {
   const app = createApp(component)
   const pinia = createPinia()
 
