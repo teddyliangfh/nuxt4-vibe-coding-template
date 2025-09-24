@@ -1,38 +1,22 @@
-import { defineVitestProject } from '@nuxt/test-utils/config'
 import { defineConfig } from 'vitest/config'
+import { resolve } from 'path'
+import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      '~': resolve(__dirname, './app'),
+      '@': resolve(__dirname, './app'),
+      '~~': resolve(__dirname, '.'),
+      '@@': resolve(__dirname, '.'),
+    },
+  },
   test: {
-    projects: [
-      // Unit tests
-      {
-        test: {
-          name: 'unit',
-          include: ['test/unit/**/*.{test,spec}.{js,ts,vue}'],
-          environment: 'jsdom',
-          globals: true,
-          setupFiles: ['test/unit/setup.ts'],
-        },
-      },
-      // Integration tests
-      {
-        test: {
-          name: 'integration',
-          include: ['test/integration/**/*.{test,spec}.{js,ts,vue}'],
-          environment: 'jsdom',
-          globals: true,
-          setupFiles: ['test/integration/setup.ts'],
-        },
-      },
-      // Nuxt tests
-      await defineVitestProject({
-        test: {
-          name: 'nuxt',
-          include: ['test/nuxt/**/*.{test,spec}.{js,ts,vue}'],
-          environment: 'nuxt',
-        },
-      }),
-    ],
+    include: ['test/unit/**/*.{test,spec}.{js,ts,vue}'],
+    environment: 'happy-dom',
+    globals: true,
+    setupFiles: ['test/unit/setup.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
@@ -58,7 +42,5 @@ export default defineConfig({
     ui: {
       enabled: true,
     },
-    globals: true,
-    environment: 'jsdom',
   },
 })

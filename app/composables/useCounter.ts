@@ -1,3 +1,5 @@
+import { ref, readonly } from 'vue'
+
 /**
  * Counter composable with reactive state management
  * Demonstrates basic state management patterns in Nuxt 4

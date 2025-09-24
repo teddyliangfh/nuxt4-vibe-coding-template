@@ -3,39 +3,44 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    es2022: true
+    es2022: true,
   },
   extends: [
-    '@nuxtjs/eslint-config-typescript',
+    'eslint:recommended',
+    '@typescript-eslint/recommended',
     'plugin:vue/vue3-recommended',
-    'plugin:@typescript-eslint/recommended'
+    '@vue/typescript/recommended',
+    'prettier',
   ],
   parser: 'vue-eslint-parser',
   parserOptions: {
-    parser: '@typescript-eslint/parser',
     ecmaVersion: 'latest',
     sourceType: 'module',
-    extraFileExtensions: ['.vue']
+    parser: '@typescript-eslint/parser',
+    extraFileExtensions: ['.vue'],
   },
-  plugins: [
-    '@typescript-eslint',
-    'vue'
-  ],
+  plugins: ['@typescript-eslint', 'vue', 'prettier'],
   rules: {
+    // Prettier integration
+    'prettier/prettier': 'error',
+    
     // Vue specific rules
     'vue/multi-word-component-names': 'off',
     'vue/no-v-html': 'warn',
-    'vue/require-default-prop': 'error',
-    'vue/require-prop-types': 'error',
+    'vue/require-default-prop': 'off',
+    'vue/require-explicit-emits': 'error',
     'vue/component-definition-name-casing': ['error', 'PascalCase'],
     'vue/component-name-in-template-casing': ['error', 'PascalCase'],
     'vue/custom-event-name-casing': ['error', 'camelCase'],
     'vue/define-macros-order': ['error', {
       order: ['defineProps', 'defineEmits']
     }],
+    'vue/html-comment-content-spacing': ['error', 'always'],
     'vue/no-unused-refs': 'error',
     'vue/padding-line-between-blocks': ['error', 'always'],
-
+    'vue/prefer-separate-static-class': 'error',
+    'vue/prefer-true-attribute-shorthand': 'error',
+    
     // TypeScript specific rules
     '@typescript-eslint/no-unused-vars': ['error', { 
       argsIgnorePattern: '^_',
@@ -47,54 +52,37 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'warn',
     '@typescript-eslint/prefer-const': 'error',
     '@typescript-eslint/no-var-requires': 'error',
-    '@typescript-eslint/consistent-type-imports': ['error', {
-      prefer: 'type-imports',
-      fixStyle: 'inline-type-imports'
-    }],
-
+    
     // General rules
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-unused-vars': 'off', // Use TypeScript version instead
     'prefer-const': 'error',
     'no-var': 'error',
     'object-shorthand': 'error',
     'prefer-template': 'error',
-    'template-curly-spacing': 'error',
-    'arrow-spacing': 'error',
-    'comma-dangle': ['error', 'never'],
-    'comma-spacing': ['error', { before: false, after: true }],
-    'comma-style': ['error', 'last'],
-    'computed-property-spacing': ['error', 'never'],
-    'func-call-spacing': ['error', 'never'],
-    'key-spacing': ['error', { beforeColon: false, afterColon: true }],
-    'keyword-spacing': ['error', { before: true, after: true }],
-    'object-curly-spacing': ['error', 'always'],
-    'semi': ['error', 'never'],
-    'space-before-blocks': 'error',
-    'space-before-function-paren': ['error', {
-      anonymous: 'always',
-      named: 'never',
-      asyncArrow: 'always'
-    }],
-    'space-in-parens': ['error', 'never'],
-    'space-infix-ops': 'error',
-    'space-unary-ops': 'error',
-    'spaced-comment': ['error', 'always'],
-    'yield-star-spacing': ['error', 'both']
   },
   overrides: [
     {
       files: ['*.vue'],
       rules: {
-        'indent': 'off'
-      }
+        // Vue specific overrides
+        'vue/block-order': ['error', {
+          order: ['template', 'script', 'style']
+        }],
+      },
     },
     {
-      files: ['*.ts', '*.tsx'],
+      files: ['**/*.test.ts', '**/*.spec.ts', 'test/**/*'],
+      env: {
+        jest: true,
+        vitest: true,
+      },
       rules: {
-        'no-undef': 'off'
-      }
-    }
+        '@typescript-eslint/no-explicit-any': 'off',
+        'no-console': 'off',
+      },
+    },
   ],
   ignorePatterns: [
     'node_modules/',
@@ -102,6 +90,5 @@ module.exports = {
     '.output/',
     'dist/',
     'coverage/',
-    '*.min.js'
-  ]
+  ],
 }

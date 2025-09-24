@@ -1,4 +1,5 @@
 import { beforeEach, vi } from 'vitest'
+import '@testing-library/jest-dom'
 
 // Mock localStorage
 const localStorageMock = {
@@ -24,6 +25,20 @@ Object.defineProperty(window, 'sessionStorage', {
 
 // Mock fetch
 global.fetch = vi.fn()
+
+// Mock IntersectionObserver
+global.IntersectionObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}))
+
+// Mock ResizeObserver
+global.ResizeObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}))
 
 // Reset all mocks before each test
 beforeEach(() => {

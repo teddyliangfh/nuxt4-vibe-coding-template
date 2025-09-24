@@ -1,12 +1,12 @@
 {
   "recommendations": [
-    "biomejs.biome",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
     "Vue.volar",
     "bradlc.vscode-tailwindcss"
   ],
   "unwantedRecommendations": [
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
+    "biomejs.biome",
     "octref.vetur"
   ]
 }

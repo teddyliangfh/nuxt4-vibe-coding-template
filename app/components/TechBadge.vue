@@ -6,6 +6,8 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+
 interface Props {
   name: string
   color: 'blue' | 'green' | 'yellow' | 'red' | 'purple' | 'pink' | 'indigo' | 'gray' | 'cyan'
