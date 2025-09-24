@@ -1,6 +1,6 @@
 {
   "name": "nuxt4-vibe-coding-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A modern Nuxt 4 template with Cursor vibe coding setup and Vitest testing",
   "private": true,
   "type": "module",
@@ -30,7 +30,7 @@
     "@pinia/nuxt": "^0.5.5",
     "@vueuse/core": "^11.1.0",
     "@vueuse/nuxt": "^11.1.0",
-    "nuxt": "^3.13.0",
+    "nuxt": "^4.1.2",
     "pinia": "^2.2.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
